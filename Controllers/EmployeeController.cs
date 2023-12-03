@@ -48,6 +48,18 @@ namespace Workforce_Monitor.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_id,emp_code,emp_name,designation,salary")] TNEmpMasterTable tNEmpMasterTable)
         {
+            if (string.IsNullOrEmpty(tNEmpMasterTable.emp_code) )
+            {
+                ModelState.AddModelError("", "Employee Code is Required");
+            }
+            if (string.IsNullOrEmpty(tNEmpMasterTable.emp_name) )
+            {
+                ModelState.AddModelError("", "Employee Name is Required.");
+            }
+            if (string.IsNullOrEmpty(tNEmpMasterTable.designation) )
+            {
+                ModelState.AddModelError("", "Employee Designation is Required.");
+            }
             if (ModelState.IsValid)
             {
                 db.TNEmpMasterTables.Add(tNEmpMasterTable);
@@ -61,6 +73,7 @@ namespace Workforce_Monitor.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +93,18 @@ namespace Workforce_Monitor.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "emp_id,emp_code,emp_name,designation,salary")] TNEmpMasterTable tNEmpMasterTable)
         {
+            if (string.IsNullOrEmpty(tNEmpMasterTable.emp_code))
+            {
+                ModelState.AddModelError("", "Employee Code is Required");
+            }
+            if (string.IsNullOrEmpty(tNEmpMasterTable.emp_name))
+            {
+                ModelState.AddModelError("", "Employee Name is Required.");
+            }
+            if (string.IsNullOrEmpty(tNEmpMasterTable.designation))
+            {
+                ModelState.AddModelError("", "Employee Designation is Required.");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(tNEmpMasterTable).State = EntityState.Modified;
